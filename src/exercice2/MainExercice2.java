@@ -1,6 +1,11 @@
 package exercice2;
 
+import datamocklib.TxtHelper;
 import exercice2.models.*;
+
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainExercice2 implements Exo2 {
 
@@ -14,7 +19,23 @@ public class MainExercice2 implements Exo2 {
      */
     @Override
     public void displayPersonFromChambery() {
-        System.out.println("todo");
+        List<String> serveurData = TxtHelper.getDataFromTxt("serveur.txt");
+        try {
+            TxtHelper.clearDataLocal();
+        }
+        catch (FileNotFoundException f)
+        {
+            System.out.println("File not Found!");
+            f.printStackTrace();
+            return;
+        }
+
+        for (String d : serveurData)
+        {
+            TxtHelper.insertDataInTxt(d, "local.txt");
+        }
+        
+        TxtHelper.getDataFromTxt("local.txt");
     }
 
     /*
